@@ -3,11 +3,11 @@ require_once 'connectuon.php';
 session_start();
 
 if (!isset($_SESSION['currentUser'])) {
-    header('Location: http://localhost/curd_task_3/login.html');
+    header('Location: http://localhost/user-manager/login.html');
     exit();
 }
 if ($_SESSION['role'] == "admin") {
-    header('Location: http://localhost/curd_task_3/admin.php');
+    header('Location: http://localhost/user-manager/admin.php');
     exit();
 }
 ?>
@@ -16,7 +16,7 @@ if(isset($_GET['logout']))
 {
     session_destroy();
     echo '<script> alert("hi")</script>';
-    header('Location: http://localhost/curd_task_3/login.html');
+    header('Location: http://localhost/user-manager/login.html');
 }
 ?>
 
@@ -81,8 +81,8 @@ if(isset($_GET['logout']))
             <div class="card mb-4" style="max-width: 700px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="https://cdn-icons-png.flaticon.com/512/506/506185.png" class="img-fluid rounded-start"
-                            alt="...">
+                        <img src="../img/<?php echo $_SESSION['image'];?>" class="img-fluid rounded-start"
+                            alt="..." width="250px"  hight="250px">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">

@@ -9,7 +9,9 @@ btn.addEventListener("click", function (e) {
   let cPassword = document.getElementById("cPassword").value;
   let mobile = document.getElementById("mobile").value;
   let birthday = document.getElementById("birthday").value;
+  let image = document.getElementById("image").value.split("\\");
 
+  console.log(image);
   // check if email valid
   const emailValid = Validation.EmailValidation(email);
   // check if user name valid
@@ -28,20 +30,21 @@ btn.addEventListener("click", function (e) {
     dateValidation &&
     matchPassword
   ) {
-    fetch("http://localhost/curd_task_3/php/register.php", {
+    fetch("http://localhost/user-manager/php/register.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
-      body: `email=${email}&password=${password}&fullName=${fullName}&mobile=${mobile}&birthday=${birthday}`,
+      body: `email=${email}&password=${password}&fullName=${fullName}&mobile=${mobile}&birthday=${birthday}&image=${image[2]}`,
     })
       .then((response) => response.json())
       .then((res) => {
-        if (res.role != "member") {
-          location.href = "../curd_task_3/php/admin.php";
-        } else {
-          location.href = "../curd_task_3/php/profile.php";
-        }
+        console.log(res);
+        // if (res.role != "member") {
+        //   location.href = "../user-manager/php/admin.php";
+        // } else {
+        //   location.href = "../user-manager/php/profile.php";
+        // }
       });
   }
 });
@@ -104,3 +107,18 @@ class Validation {
     }
   }
 }
+
+let loginG = document.getElementById("loginG");
+loginG.addEventListener("click", function (e) {
+  fetch("http://localhost/user-manager/php/redirect.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    },
+    body: `email=${email}`,
+  })
+    .then((response) => response.text())
+    .then((res) => {
+      location.href = res;
+    });
+});

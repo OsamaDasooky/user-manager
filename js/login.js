@@ -1,12 +1,12 @@
 let btn = document.getElementById("login");
-
+let loginG = document.getElementById("loginG");
 btn.addEventListener("click", function (e) {
   e.preventDefault();
 
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
 
-  fetch("http://localhost/curd_task_3/php/login.php", {
+  fetch("http://localhost/user-manager/php/login.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -19,10 +19,23 @@ btn.addEventListener("click", function (e) {
         alert("password or email is incorrect");
       } else {
         if (res.role == "admin") {
-          location.href = "../curd_task_3/php/admin.php";
+          location.href = "../user-manager/php/admin.php";
         } else if (res.role != "admin") {
-          location.href = "../curd_task_3/php/profile.php";
+          location.href = "../user-manager/php/profile.php";
         }
       }
+    });
+});
+loginG.addEventListener("click", function (e) {
+  fetch("http://localhost/user-manager/php/redirect.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    },
+    body: `email=${email}`,
+  })
+    .then((response) => response.text())
+    .then((res) => {
+      location.href = res;
     });
 });

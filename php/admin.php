@@ -4,7 +4,7 @@ require_once 'connectuon.php';
 session_start();
 
 if (!isset($_SESSION['currentUser'])) {
-    header('Location: http://localhost/curd_task_3/login.html');
+    header('Location: http://localhost/user-manager/login.html');
     exit();
 }
 
@@ -13,7 +13,7 @@ if(isset($_GET['logout']))
 {
     session_destroy();
     echo '<script> alert("hi")</script>';
-    header('Location: http://localhost/curd_task_3/login.html');
+    header('Location: http://localhost/user-manager/login.html');
 }
 
 
@@ -31,7 +31,7 @@ $query -> execute();
 // Mesage after updation
 echo "<script>alert('Record Updated successfully');</script>";
 // Code for redirection
-echo "<script>window.location.href='http://localhost/curd_task_3/php/admin.php'</script>"; 
+echo "<script>window.location.href='http://localhost/user-manager/php/admin.php'</script>"; 
 }
 ?>
 

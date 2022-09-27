@@ -9,10 +9,11 @@ $password=$_POST['password'];
 $fullName=$_POST['fullName'];
 $mobile=$_POST['mobile'];
 $birthday=$_POST['birthday'];
+$image=$_POST['image'];
 date_default_timezone_set('Asia/Amman');
 $data =  date("Y/m/d h:i");
     try {
-        $insert = $conn->prepare("INSERT INTO info VALUES ('member','$fullName','$email','$mobile','$password','$birthday',CURRENT_TIMESTAMP,'$data')");
+        $insert = $conn->prepare("INSERT INTO info VALUES ('member','$fullName','$email','$mobile','$password','$birthday','$image',CURRENT_TIMESTAMP,'$data')");
         $insert->execute();
         $insert1 = $conn->prepare("SELECT * FROM info WHERE Email='$email'");
         $insert1->execute();
@@ -23,6 +24,7 @@ $data =  date("Y/m/d h:i");
         $_SESSION['FullName'] = $results->FullName;
         $_SESSION['Mobile'] = $results->Mobile;
         $_SESSION['Birthday'] = $results->Birthday;
+        $_SESSION['image'] = $results->img;
         $_SESSION['role'] = $results->role;
         $_SESSION['lastLogin'] = $results->lastLogin;
 
